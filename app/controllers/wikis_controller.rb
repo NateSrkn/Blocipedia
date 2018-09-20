@@ -1,14 +1,20 @@
 class WikisController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+
+
   def index
     @wikis = Wiki.all
+    authorize @wikis
   end
 
   def show
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
 
   def new
     @wiki = Wiki.new
+    authorize @wiki
   end
 
   def create
@@ -26,6 +32,7 @@ class WikisController < ApplicationController
       flash.now[:alert] = "There was an error saving the wiki. Please try again."
       render :new
     end
+    authorize @wiki
   end
 
   def update
@@ -39,10 +46,12 @@ class WikisController < ApplicationController
       flash.now[:alert] = "There was an Error editing your Wiki."
       render :edit
     end
+    authorize @wiki
   end
 
   def edit
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
 
   def destroy
@@ -53,6 +62,7 @@ class WikisController < ApplicationController
     else
       render :show 
     end
+    authorize @wiki
   end
   
 

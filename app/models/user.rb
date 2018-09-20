@@ -3,4 +3,16 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  has_many :wikis
+  before_save :default_role
+
+  enum role: [:standard, :premium, :admin]
+
+  private 
+
+  def default_role
+    self.role = 0
+  end
+  
 end
