@@ -29,6 +29,8 @@ admin = User.create!(
     password: 'password',
 )
 
+
+
 puts "Seed finished"
 puts "#{User.count} user(s) created"
 puts "#{Wiki.count} Wiki(s) created"

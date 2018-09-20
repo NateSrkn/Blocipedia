@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :wikis
+  has_many :wikis, dependent: :destroy
   before_save :default_role
 
   enum role: [:standard, :premium, :admin]
@@ -12,7 +12,7 @@ class User < ApplicationRecord
   private 
 
   def default_role
-    self.role = 0
+    self.role ||= 0
   end
   
 end

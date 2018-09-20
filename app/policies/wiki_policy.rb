@@ -17,17 +17,16 @@ class WikiPolicy < ApplicationPolicy
     end
 
     def edit?
-       user.present? 
+      user.try(:admin?) || record.user == user
     end
 
     def update?
         edit?
     end
 
-    private
-
-    def wiki 
-        record
+    def destroy?
+        edit?
     end
+
 
 end
