@@ -5,3 +5,36 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+users = User.all
+
+
+5.times do
+    User.create!(
+        email: Faker::Internet.email,
+        password: Faker::Internet.password,
+    )
+end
+
+20.times do
+    Wiki.create!(
+        title: Faker::Name.name,
+        body: Faker::Seinfeld.quote,
+        private: false,
+        user: users.sample,
+    )
+end
+
+admin = User.create!(
+    email: 'NateSrkn@gmail.com',
+    password: 'password',
+    role: 2
+)
+
+standard = User.create!(
+    email: 'Standard@gmail.com',
+    password: 'password'
+)
+
+puts "Seed finished"
+puts "#{User.count} user(s) created"
+puts "#{Wiki.count} Wiki(s) created"
