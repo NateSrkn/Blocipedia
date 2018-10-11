@@ -1,5 +1,5 @@
-require 'stripe'
 class ChargesController < ApplicationController
+    require 'stripe'
 
     def create
         @user = current_user
@@ -18,7 +18,8 @@ class ChargesController < ApplicationController
         )
 
         flash[:notice] = "Thank you for your membership, #{current_user.email}."
-        redirect_to user_path(current_user)
+        @user.update_attributes(role: 1)
+        redirect_to root_path
 
         rescue Stripe::CardError => e
             flash[:alert] = e.message
@@ -29,20 +30,17 @@ class ChargesController < ApplicationController
     def new
         @stripe_btn_data = {
         key: "#{ Rails.configuration.stripe[:publishable_key] }",
-        description: "Premium Membership - #{current_user.name}",
+        description: "Premium Membership - #{current_user.email}",
         amount: 15_00
         }
     end
 
     def cancel
-        subscription = Stripe::Subscription.retrieve("sub_8Xw6Ak8Gc4EvJx")
-        subscription.delete(at_period_end: true)
+        @user = current_user
         
-        current_user.update_attribute(:role, 'standard')
-        current_user.wikis.where(private: true).update_all(private: false)
-        
-        
-        flash[:notice] = "You are now a Standard Member."
+        @user.update_attributes(role: 0)
+        @user.wikis.where(private: true).update_all(private: false)
+
         redirect_to wikis_path
       end
     

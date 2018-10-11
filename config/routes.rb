@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   resources :wikis
   resources :charges
+
+  post 'charges/cancel'
   
-  root 'welcome#index'
+  root 'wikis#index'
 end

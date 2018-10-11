@@ -1,26 +1,80 @@
 // Place all the styles related to the Welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import url('https://fonts.googleapis.com/css?family=Merriweather');
 
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Merriweather', serif;
+    position: relative;
+}
 
 .nav-bar {
     width: 100%;
-    height: 100px;
+    height: 87px;
+    display: flex;
     position: relative;
+    align-items: center;
+    border-bottom: 2px solid black;
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
     
-
-    .nav-options {
-        display: flex;
-        list-style-type: none;
-
-        li {
-            margin-right: 15px;
-        }
+    .hero-text {
+        font-size:  1.7em;
+        padding-left: 4%;
     }
 
     .login-opt {
-        position: absolute;
-        top: 0;
-        right: 0;
+        margin-left: auto;
+        padding-right:4%;
+        width: 200px;
+    }
+
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+#wikis {
+   width: 100%;
+   display: grid;
+   grid-template-columns: 300px 300px 300px;
+   grid-gap: 15px;
+
+    .wiki-choice {
+        border: 2px solid black;
+        padding: 2%;
     }
 }
+
+.wiki-contain {
+    width: 50%;
+
+    .wiki-head {
+        display:flex;
+        align-items:center;
+
+        .opt {
+            margin-left:auto;
+        }
+    }
+
+    .wiki-body {
+        border: 2px solid black;
+        padding: 5%;
+        height: 100vh;
+    }
+}
+
