@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="wiki-body">
-        <p><%= @wiki.body %></p>
+        <p><%= markdown @wiki.body %></p>
         <small><strong>Posted By:</strong> <%= @wiki.user.email %></small>
     </div>
 </div>
