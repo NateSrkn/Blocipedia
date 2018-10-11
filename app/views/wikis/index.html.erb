@@ -8,13 +8,22 @@
 
     <div id="wikis">
         <% @wikis.each do |wiki| %>
+        <% if current_user.try(:premium?) && wiki.private? %>
+            <div class="wiki-choice">
+            <h3><%= link_to wiki.title, wiki %></h3>
+            <p>
+                <%= wiki.user.email %>
+            </p>
+        </div>
+        <% elsif wiki.private === false %>
         <div class="wiki-choice">
             <h3><%= link_to wiki.title, wiki %></h3>
             <p>
                 <%= wiki.user.email %>
             </p>
-
         </div>
+        <% end %>
         <% end %>
     </div>
 </div>
+
