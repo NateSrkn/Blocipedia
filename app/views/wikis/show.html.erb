@@ -12,4 +12,7 @@
         <p><%= markdown @wiki.body %></p>
         <small><strong>Posted By:</strong> <%= @wiki.user.email %></small>
     </div>
+    <div class="collaborators">
+      <%= render partial: 'collaborators/list' %>
+    </div>
 </div>

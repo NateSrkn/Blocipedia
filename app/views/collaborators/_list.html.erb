@@ -1,0 +1,12 @@
+<h3 id="collaborators">Collaborators</h3>
+<ul class="collab-list">
+  <% @wiki.collaborators.each do |collaborator| %>
+  <li>
+    <%= User.find_by_id(collaborator.user_id).name %>
+    <% if policy(@wiki).destroy? %>
+      <%= link_to "Delete", [@wiki, collaborator], class: '', id: "delete", method: :delete, data: {confirm: 'Are you sure you want to delete this collaborator?'} %>
+    <% end %>
+  </li>
+  <% end %>
+
+</ul>

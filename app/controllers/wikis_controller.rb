@@ -8,6 +8,8 @@ class WikisController < ApplicationController
 
     def show
         @wiki = Wiki.friendly.find(params[:id])
+        @users = User.find_by(id: params[:id])
+        @collaborators = @wiki.collaborators
         authorize @wiki
     end
 
@@ -35,7 +37,7 @@ class WikisController < ApplicationController
     end
 
     def update
-        @wiki = Wiki.find(params[:id])
+        @wiki = Wiki.friendly.find(params[:id])
         @wiki.assign_attributes(wiki_params)
 
         if @wiki.save
@@ -49,12 +51,14 @@ class WikisController < ApplicationController
     end
 
     def edit
-        @wiki = Wiki.find(params[:id])
+        @wiki = Wiki.friendly.find(params[:id])
+        @users = User.where.not(id: current_user.id)
+        @collaborators = @wiki.collaborators
         authorize @wiki
     end
 
     def destroy
-        @wiki = Wiki.find(params[:id])
+        @wiki = Wiki.friendly.find(params[:id])
 
         if @wiki.destroy
           redirect_to wikis_path
