@@ -35,6 +35,19 @@ standard = User.create!(
     password: 'password'
 )
 
+premium = User.create!(
+    email: 'premium@ex.com',
+    password: 'password',
+    role: 1
+)
+
+Wiki.create!(
+    title: 'Private Wiki',
+    body: 'Private Body',
+    private: true,
+    user: User.last
+)
+
 puts "Seed finished"
 puts "#{User.count} user(s) created"
 puts "#{Wiki.count} Wiki(s) created"

@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :wikis
+  has_many :collaborators
   before_save :default_role
 
   enum role: [:standard, :premium, :admin]
